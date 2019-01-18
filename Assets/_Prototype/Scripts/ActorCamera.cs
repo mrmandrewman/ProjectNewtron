@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+[RequireComponent(typeof(Camera))]
+[RequireComponent(typeof(AudioListener))]
+[RequireComponent(typeof(BoxCollider))]
+public class ActorCamera : MonoBehaviour
 {
 	// The player object that the camera will follow
 	private GameObject player;
 
 	// The space where the player can move around and the camera will not move
-	BoxCollider deadZone;
+	private BoxCollider deadZone;
+
 	// The desired move translation of the camera
-	Vector3 moveVector;
+	private Vector3 moveVector;
 
 	// The boundary of the level
-	public Bounds boundary;
+	[SerializeField] Bounds boundary;
 
 	public static Vector2 cameraSize;
 

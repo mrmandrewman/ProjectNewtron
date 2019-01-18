@@ -97,10 +97,13 @@ public class ActorPlayer : ShipController
 			Mathf.Clamp(transform.position.y, boundary.playerBoundsPosition.y - boundary.playerBoundsHalfSize.y, boundary.playerBoundsPosition.y + boundary.playerBoundsHalfSize.y),
 			0.0f
 		);
-		
+
 
 		// For Development only
-		PrototypeControls();
+		if (Application.platform == RuntimePlatform.WindowsEditor)
+		{
+			transform.Translate(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * moveSpeedPrototype * Time.deltaTime);
+		}
 
 		// Touch Controls
 		//if (Input.touchCount > 0)
@@ -172,12 +175,6 @@ public class ActorPlayer : ShipController
 
 	#endregion
 
-
-	// For Development only
-	void PrototypeControls()
-	{
-		transform.Translate(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * moveSpeedPrototype * Time.deltaTime);
-	}
 
 	// Coroutine to shoot bullets based on current upgrade
 	override public IEnumerator Shoot()

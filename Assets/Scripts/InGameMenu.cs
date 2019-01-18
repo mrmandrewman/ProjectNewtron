@@ -42,7 +42,7 @@ public class InGameMenu : MonoBehaviour
 		PauseButton.interactable = true;
 		Time.timeScale = 1.0f;
 		ActorPlayer.CalibrateAccelerometer();
-		CameraController.InitCameraSize();
+		ActorCamera.InitCameraSize();
         bGameIsPaused = false;
     }
 }
