@@ -8,7 +8,10 @@ public enum ControlType
 	Tilt
 }
 
-public class PlayerController : ShipController
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
+public class ActorPlayer : ShipController
 {
 
 
@@ -29,25 +32,25 @@ public class PlayerController : ShipController
 	Vector3 InputDir;
 
 	// The boundary of the map that the player can move to
-	public Bounds boundary;
+	[SerializeField] Bounds boundary;
 
 	// Move Speed for Tilt Controls
-	public float moveSpeedTilt = 5.0f;
+	[SerializeField] float moveSpeedTilt = 5.0f;
 
 	// Power to increase for precision controls
-	public float precisionControlPower = 1.6f;
+	[SerializeField] float precisionControlPower = 1.6f;
 
 	// Used to Calibrate Device Tilt
 	public static Matrix4x4 calibrationMatrix;
 
 	// Deadzone Magnitudes
-	public float wantedDeadZone = 0.05f;
+	[SerializeField] float wantedDeadZone = 0.05f;
 
 	// Magnitude of tilt limit
-	public float wantedTiltLimit = 0.25f;
+	[SerializeField] float wantedTiltLimit = 0.25f;
 
 	// Magnitude for Clamp Max
-	public float wantedMaxClamp = 0.05f;
+	[SerializeField] float wantedMaxClamp = 0.05f;
 	#endregion
 
 
@@ -55,8 +58,8 @@ public class PlayerController : ShipController
 	//public int attackSpeedPowerUpsCollected;
 
 	// Game objects where bullets spawn from
-	public GameObject[] TripleTurrets;
-	public GameObject[] QuinTurrets;
+	[SerializeField] GameObject[] TripleTurrets;
+	[SerializeField] GameObject[] QuinTurrets;
 
 	// Use this for initialization
 	void Start()
