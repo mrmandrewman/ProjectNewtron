@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : ShipController
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(ShootingController))]
+public class EnemyController : MonoBehaviour
 {
 	public EnemyPath shipPath;
 	private float progress = 0;
 	private bool isFinished = false;
 
+	[SerializeField] float maxHealth;
+	protected float currentHealth;
+
 	// Use this for initialization
 	void Start()
 	{
-		// Start autoshooting
-		StartCoroutine("Shoot");
+
 	}
 
 	void OnEnabled()
@@ -45,7 +50,7 @@ public class EnemyController : ShipController
 		}
 	}
 
-	public override bool TrySpawnBullet(GameObject gameObject)
+	private bool shoot(GameObject gameObject)
 	{
 		GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject();
 		if (bullet != null)
@@ -59,12 +64,12 @@ public class EnemyController : ShipController
 		else
 		{
 			ObjectPooler.SharedInstance.AddToPool();
-			TrySpawnBullet(gameObject);
+			shoot(gameObject);
 		}
 		return false;
 	}
 
-	protected override void Death()
+	private void Death()
 	{
 		// Add Points to player and set as inactive
 		SendMessageUpwards("EnemyDeactive", SendMessageOptions.DontRequireReceiver);

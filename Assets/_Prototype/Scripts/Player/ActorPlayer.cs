@@ -8,12 +8,24 @@ public enum ControlType
 	Tilt
 }
 
+public enum AttackType
+{
+	None,
+	Basic,
+	Triple,
+	Quin,
+}
+
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class ActorPlayer : ShipController
+[RequireComponent(typeof(ShootingController))]
+public class ActorPlayer : MonoBehaviour
 {
 
+	private readonly AttackType CurrentAttackType = AttackType.Basic;
+
+	[SerializeField] GameObject BasicTurret;
 
 	public float moveSpeedPrototype = 3.0f;
 
@@ -66,14 +78,6 @@ public class ActorPlayer : ShipController
 	{
 		CalibrateAccelerometer();
 
-		// Initialise from PlayerState
-		currentHealth = PlayerState.SharedInstance.maxHealth;
-		currentShield = PlayerState.SharedInstance.maxShield;
-
-		//attackPowerUpsCollected = PlayerState.SharedInstance.attackPowerUpsCollected;
-
-		// Start autoshooting
-		StartCoroutine("Shoot");
 	}
 
 	// Update is called once per frame
@@ -97,10 +101,13 @@ public class ActorPlayer : ShipController
 			Mathf.Clamp(transform.position.y, boundary.playerBoundsPosition.y - boundary.playerBoundsHalfSize.y, boundary.playerBoundsPosition.y + boundary.playerBoundsHalfSize.y),
 			0.0f
 		);
-		
+
 
 		// For Development only
-		PrototypeControls();
+		if (Application.platform == RuntimePlatform.WindowsEditor)
+		{
+			transform.Translate(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * moveSpeedPrototype * Time.deltaTime);
+		}
 
 		// Touch Controls
 		//if (Input.touchCount > 0)
@@ -173,58 +180,50 @@ public class ActorPlayer : ShipController
 	#endregion
 
 
-	// For Development only
-	void PrototypeControls()
-	{
-		transform.Translate(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * moveSpeedPrototype * Time.deltaTime);
-	}
-
 	// Coroutine to shoot bullets based on current upgrade
-	override public IEnumerator Shoot()
+	public void shoot()
 	{
-		while (bShotActive)
-		{
-			switch (CurrentAttackType)
-			{
-				case AttackType.Basic:
-					TrySpawnBullet(BasicTurret);
-					break;
-				case AttackType.Triple:
-					for (int i = 0; i < TripleTurrets.Length; i++)
-					{
-						TrySpawnBullet(TripleTurrets[i]);
-					}
-					break;
-				case AttackType.Quin:
-					for (int i = 0; i < QuinTurrets.Length; i++)
-					{
-						TrySpawnBullet(QuinTurrets[i]);
-					}
-					break;
-				default:
-					break;
-			}
-			yield return new WaitForSeconds(shotReloadTime);
-		}
+		//switch (CurrentAttackType)
+		//{
+		//	case AttackType.Basic:
+		TrySpawnBullet(BasicTurret);
+		//		break;
+		//	case AttackType.Triple:
+		//		for (int i = 0; i < TripleTurrets.Length; i++)
+		//		{
+		//			TrySpawnBullet(TripleTurrets[i]);
+		//		}
+		//		break;
+		//	case AttackType.Quin:
+		//		for (int i = 0; i < QuinTurrets.Length; i++)
+		//		{
+		//			TrySpawnBullet(QuinTurrets[i]);
+		//		}
+		//		break;
+		//	default:
+		//		break;
+		//}
+
 	}
 
-	// Spawns a bullet at the referenced gameobjects transform, tries to dip into object pool
-	override public bool TrySpawnBullet(GameObject gameObject)
+	// Spawns a bullet at the referenced gameobject's transform, tries to dip into object pool
+	private bool TrySpawnBullet(GameObject gameObject)
 	{
 		GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject();
-		if (bullet != null)
-		{
-			bullet.transform.position = gameObject.transform.position;
-			bullet.transform.rotation = gameObject.transform.rotation;
-			bullet.SetActive(true);
-			bullet.GetComponent<Projectile>().ignoreTag = "Player";
-			return true;
-		}
-		else
-		{
-			ObjectPooler.SharedInstance.AddToPool();
-			TrySpawnBullet(gameObject);
-		}
+		//Debug.Log(bullet);
+		//if (bullet != null)
+		//{
+		//	bullet.transform.position = gameObject.transform.position;
+		//	bullet.transform.rotation = gameObject.transform.rotation;
+		//	bullet.SetActive(true);
+		////	bullet.GetComponent<Projectile>().ignoreTag = "Player";
+		//return true;
+		//}
+		//else
+		//{
+		//	ObjectPooler.SharedInstance.AddToPool();
+		//	TrySpawnBullet(gameObject);
+		//	}
 		return false;
 	}
 

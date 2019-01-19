@@ -13,18 +13,20 @@ public class ObjectPooler : MonoBehaviour
     private void Awake()
     {
         SharedInstance = this;
-    }
+
+		pooledObjects = new List<GameObject>();
+
+		for (int j = 0; j < amountToPool; j++)
+		{
+			GameObject obj = Instantiate(objectsToPool);
+			obj.SetActive(false);
+			pooledObjects.Add(obj);
+		}
+	}
     // Use this for initialization
     void Start()
     {
-        pooledObjects = new List<GameObject>();
-
-        for (int j = 0; j < amountToPool; j++)
-        {
-            GameObject obj = Instantiate(objectsToPool);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);
-        }
+       
 
     }
 
