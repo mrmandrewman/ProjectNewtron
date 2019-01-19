@@ -20,16 +20,18 @@ public enum AttackType
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(ShootingController))]
+[RequireComponent(typeof(DamageController))]
 public class ActorPlayer : MonoBehaviour
 {
 
-	private readonly AttackType CurrentAttackType = AttackType.Basic;
+	//private AttackType CurrentAttackType = AttackType.Basic;
 
-	[SerializeField] GameObject BasicTurret;
+	[SerializeField] GameObject bullet;
+	[SerializeField] GameObject basicTurret;
 
 	public float moveSpeedPrototype = 3.0f;
 
-	// Unused kept as comment form for now
+	// Unused kept as comment for now
 	#region Touch Controls Parameters
 	// Reference to players touch for input
 	//Touch touch;
@@ -65,14 +67,7 @@ public class ActorPlayer : MonoBehaviour
 	[SerializeField] float wantedMaxClamp = 0.05f;
 	#endregion
 
-
-	//public int attackPowerUpsCollected = 0;
-	//public int attackSpeedPowerUpsCollected;
-
-	// Game objects where bullets spawn from
-	[SerializeField] GameObject[] TripleTurrets;
-	[SerializeField] GameObject[] QuinTurrets;
-
+	
 	// Use this for initialization
 	void Start()
 	{
@@ -180,50 +175,17 @@ public class ActorPlayer : MonoBehaviour
 	#endregion
 
 
-	// Coroutine to shoot bullets based on current upgrade
-	public void shoot()
-	{
-		//switch (CurrentAttackType)
-		//{
-		//	case AttackType.Basic:
-		TrySpawnBullet(BasicTurret);
-		//		break;
-		//	case AttackType.Triple:
-		//		for (int i = 0; i < TripleTurrets.Length; i++)
-		//		{
-		//			TrySpawnBullet(TripleTurrets[i]);
-		//		}
-		//		break;
-		//	case AttackType.Quin:
-		//		for (int i = 0; i < QuinTurrets.Length; i++)
-		//		{
-		//			TrySpawnBullet(QuinTurrets[i]);
-		//		}
-		//		break;
-		//	default:
-		//		break;
-		//}
 
+	public void Shoot()
+	{
+		TrySpawnBullet(basicTurret);
 	}
 
 	// Spawns a bullet at the referenced gameobject's transform, tries to dip into object pool
-	private bool TrySpawnBullet(GameObject gameObject)
+	private bool TrySpawnBullet(GameObject origin)
 	{
-		GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject();
-		//Debug.Log(bullet);
-		//if (bullet != null)
-		//{
-		//	bullet.transform.position = gameObject.transform.position;
-		//	bullet.transform.rotation = gameObject.transform.rotation;
-		//	bullet.SetActive(true);
-		////	bullet.GetComponent<Projectile>().ignoreTag = "Player";
-		//return true;
-		//}
-		//else
-		//{
-		//	ObjectPooler.SharedInstance.AddToPool();
-		//	TrySpawnBullet(gameObject);
-		//	}
+		GameObject bulletClone = Instantiate(bullet, origin.transform.position, origin.transform.rotation);
+		bulletClone.GetComponent<Projectile>().ignoreTag = "Player";
 		return false;
 	}
 

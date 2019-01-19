@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
         CurrentTTL -= Time.deltaTime;
         if (CurrentTTL <= 0.0f)
         {            
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
@@ -45,11 +45,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.tag != ignoreTag)
         {
+			Debug.Log("Ourch");
             collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
-            gameObject.SetActive(false);
+			Destroy(gameObject);
         }
     }
 }

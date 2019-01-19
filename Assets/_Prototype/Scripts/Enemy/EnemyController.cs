@@ -5,11 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(ShootingController))]
+[RequireComponent(typeof(DamageController))]
 public class EnemyController : MonoBehaviour
 {
 	public EnemyPath shipPath;
 	private float progress = 0;
 	private bool isFinished = false;
+	[SerializeField] GameObject turret;
+	[SerializeField] GameObject bullet;
+
 
 	[SerializeField] float maxHealth;
 	protected float currentHealth;
@@ -50,22 +54,10 @@ public class EnemyController : MonoBehaviour
 		}
 	}
 
-	private bool shoot(GameObject gameObject)
+	private bool Shoot()
 	{
-		GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject();
-		if (bullet != null)
-		{
-			bullet.transform.position = gameObject.transform.position;
-			bullet.transform.rotation = gameObject.transform.rotation;
-			bullet.SetActive(true);
-			bullet.GetComponent<Projectile>().ignoreTag = "Enemy";
-			return true;
-		}
-		else
-		{
-			ObjectPooler.SharedInstance.AddToPool();
-			shoot(gameObject);
-		}
+		//GameObject bulletClone = Instantiate(bullet, turret.transform.position, turret.transform.rotation);
+		//bulletClone.GetComponent<Projectile>().ignoreTag = "Enemy";
 		return false;
 	}
 
@@ -75,7 +67,5 @@ public class EnemyController : MonoBehaviour
 		SendMessageUpwards("EnemyDeactive", SendMessageOptions.DontRequireReceiver);
 		transform.parent.gameObject.SetActive(false);
 	}
-
-
 
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShootingController : MonoBehaviour {
-	[Tooltip("Actor with a shoot function to spawn projectile")]
-	[SerializeField] MonoBehaviour shootingActor;
 
 	// publicly accessable boolean to turn shooting off and on
 	public bool bShotActive = true;
@@ -15,7 +13,7 @@ public class ShootingController : MonoBehaviour {
 	private void Awake()
 	{
 		// Start autoshooting
-		StartCoroutine("Shoot");
+		StartCoroutine("Shooting");
 	}
 
 	// Use this for initialization
@@ -27,11 +25,11 @@ public class ShootingController : MonoBehaviour {
 		
 	}
 
-	virtual public IEnumerator Shoot()
+	virtual public IEnumerator Shooting()
 	{
 		while (bShotActive)
 		{
-			shootingActor.SendMessage("shoot", SendMessageOptions.RequireReceiver);
+			gameObject.SendMessage("Shoot", SendMessageOptions.RequireReceiver);
 
 			yield return new WaitForSeconds(shotReloadTime);
 		}

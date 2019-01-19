@@ -12,7 +12,6 @@ public class ObjectPooler : MonoBehaviour
 
     private void Awake()
     {
-        SharedInstance = this;
 
 		pooledObjects = new List<GameObject>();
 
@@ -23,20 +22,13 @@ public class ObjectPooler : MonoBehaviour
 			pooledObjects.Add(obj);
 		}
 	}
-    // Use this for initialization
-    void Start()
-    {
-       
 
-    }
+	private void Start()
+	{
+		SharedInstance = this;
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public GameObject GetPooledObject()
+	public GameObject GetPooledObject()
     {
         foreach (GameObject pooledObject in pooledObjects)
         {
