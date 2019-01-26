@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class ActorGameCamera : MonoBehaviour
 {
 	// The player object that the camera will follow
 	private GameObject player;
