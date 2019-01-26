@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(ShootingController))]
 [RequireComponent(typeof(DamageController))]
-public class EnemyController : MonoBehaviour
+public class ActorEnemy : MonoBehaviour
 {
 	public EnemyPath shipPath;
 	private float progress = 0;
@@ -14,24 +14,7 @@ public class EnemyController : MonoBehaviour
 	[SerializeField] GameObject turret;
 	[SerializeField] GameObject bullet;
 
-
-	[SerializeField] float maxHealth;
-	protected float currentHealth;
-
-	// Use this for initialization
-	void Start()
-	{
-
-	}
-
-	void OnEnabled()
-	{
-	}
-
-	private void OnEnable()
-	{
-		currentHealth = maxHealth;
-	}
+	
 
 	// Update is called once per frame
 	void Update()
@@ -47,11 +30,6 @@ public class EnemyController : MonoBehaviour
 			Death();
 		}
 
-		if (currentHealth <= 0)
-		{
-			// ToDo Add points to player
-			Death();
-		}
 	}
 
 	private bool Shoot()

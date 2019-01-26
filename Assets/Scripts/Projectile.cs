@@ -47,7 +47,6 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.tag != ignoreTag)
         {
-			Debug.Log("Ourch");
             collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);
         }
