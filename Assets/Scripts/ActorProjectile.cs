@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class ActorProjectile : MonoBehaviour
 {
     public string ignoreTag = "";
     public float damage = 1.0f;

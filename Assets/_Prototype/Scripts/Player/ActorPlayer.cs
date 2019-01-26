@@ -185,7 +185,7 @@ public class ActorPlayer : MonoBehaviour
 	private bool TrySpawnBullet(GameObject origin)
 	{
 		GameObject bulletClone = Instantiate(bullet, origin.transform.position, origin.transform.rotation);
-		bulletClone.GetComponent<Projectile>().ignoreTag = "Player";
+		bulletClone.GetComponent<ActorProjectile>().ignoreTag = "Player";
 		return false;
 	}
 
