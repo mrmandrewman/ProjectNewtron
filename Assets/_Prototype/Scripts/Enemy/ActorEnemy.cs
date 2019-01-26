@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(DamageController))]
 public class ActorEnemy : MonoBehaviour
 {
-	public EnemyPath shipPath;
+	public ActorEnemyPath shipPath;
 	private float progress = 0;
 	private bool isFinished = false;
 	[SerializeField] GameObject turret;

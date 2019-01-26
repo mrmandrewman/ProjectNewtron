@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 
-public class EnemyPath : MonoBehaviour
+public class ActorEnemyPath : MonoBehaviour
 {
 	[SerializeField]
 	public PathPoint[] pathingPoints;

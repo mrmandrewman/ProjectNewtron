@@ -4,10 +4,10 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(EnemyPath))]
+[CustomEditor(typeof(ActorEnemyPath))]
 public class PathInspector : Editor
 {
-	private EnemyPath path;
+	private ActorEnemyPath path;
 
 	private Transform handleTransform;
 	private Quaternion handleRotation;
@@ -29,7 +29,7 @@ public class PathInspector : Editor
 
 	private void OnSceneGUI()
 	{
-		path = target as EnemyPath;
+		path = target as ActorEnemyPath;
 
 		handleTransform = path.transform;
 
@@ -135,7 +135,7 @@ public class PathInspector : Editor
 	public override void OnInspectorGUI()
 	{
 
-		path = target as EnemyPath;
+		path = target as ActorEnemyPath;
 
 		// Resize arrays expandItem and usePolarCoord to match the amount of points
 		if (expandItem.Length != path.pathingPoints.Length)

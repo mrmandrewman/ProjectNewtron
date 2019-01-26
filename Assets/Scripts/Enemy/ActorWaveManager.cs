@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+public class ActorWaveManager : MonoBehaviour
 {
-	private EnemyWave[] waves;
+	private ActorEnemyWave[] waves;
 	
 	private int currentWave = 0;
 	
@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
 	void Start()
 	{
 		// Get reference to all waves that are children of this object
-		waves = transform.GetComponentsInChildren<EnemyWave>(true);
+		waves = transform.GetComponentsInChildren<ActorEnemyWave>(true);
 
 		waves[currentWave].gameObject.SetActive(true);
 	}

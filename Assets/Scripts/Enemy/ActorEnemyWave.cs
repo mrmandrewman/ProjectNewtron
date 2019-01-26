@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class EnemyWave : MonoBehaviour
+public class ActorEnemyWave : MonoBehaviour
 {
-	private EnemyPath[] enemies;
+	private ActorEnemyPath[] enemies;
 
 	private int activeEnemies;
 
@@ -17,13 +17,13 @@ public class EnemyWave : MonoBehaviour
 	void Start()
 	{
 		// Get reference to all enemies within wave
-		enemies = transform.GetComponentsInChildren<EnemyPath>();
+		enemies = transform.GetComponentsInChildren<ActorEnemyPath>();
 		
 		// Get number of active enemies
-		activeEnemies = transform.GetComponentsInChildren<EnemyPath>(false).Length;
+		activeEnemies = transform.GetComponentsInChildren<ActorEnemyPath>(false).Length;
 		
 		// Calculate the wave duration
-		foreach (EnemyPath Path in enemies)
+		foreach (ActorEnemyPath Path in enemies)
 		{
 			if (Path.GetPathDuration() > waveDuration)
 			{
