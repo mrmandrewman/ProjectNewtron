@@ -46,7 +46,7 @@ public class ActorPlayer : MonoBehaviour
 	Vector3 InputDir;
 
 	// The boundary of the map that the player can move to
-	[SerializeField] Bounds boundary;
+	[SerializeField] ActorBounds boundary;
 
 	// Move Speed for Tilt Controls
 	[SerializeField] float moveSpeedTilt = 5.0f;

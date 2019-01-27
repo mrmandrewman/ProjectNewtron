@@ -13,7 +13,7 @@ public class ActorGameCamera : MonoBehaviour
 	Vector3 moveVector;
 
 	// The boundary of the level
-	public Bounds boundary;
+	public ActorBounds boundary;
 
 	public static Vector2 cameraSize;
 

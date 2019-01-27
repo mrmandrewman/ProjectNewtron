@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Bounds))]
+[CustomEditor(typeof(ActorBounds))]
 public class BoundsInspector : Editor
 {
-	private Bounds bounds;
+	private ActorBounds bounds;
 
 	private Transform handleTransform;
 	private Quaternion handleRotation;
@@ -13,7 +13,7 @@ public class BoundsInspector : Editor
 
 	private void OnSceneGUI()
 	{
-		bounds = target as Bounds;
+		bounds = target as ActorBounds;
 
 		Handles.DrawSolidRectangleWithOutline(new Rect(bounds.playerBoundsPosition - bounds.playerBoundsSize /2, bounds.playerBoundsSize), new Color(0, 0, 0, 0), Color.green);
 		Handles.DrawSolidRectangleWithOutline(new Rect(bounds.cameraBoundsPosition - bounds.cameraBoundsSize / 2, bounds.cameraBoundsSize), new Color(0, 0, 0, 0), Color.blue);
@@ -21,7 +21,7 @@ public class BoundsInspector : Editor
 
 	public override void OnInspectorGUI()
 	{
-		bounds = target as Bounds;
+		bounds = target as ActorBounds;
 
 
 		EditorGUILayout.LabelField("Player Bounds", EditorStyles.boldLabel);
