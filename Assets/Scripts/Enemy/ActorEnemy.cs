@@ -14,6 +14,8 @@ public class ActorEnemy : MonoBehaviour
 	[SerializeField] GameObject turret;
 	[SerializeField] GameObject bullet;
 
+	[SerializeField] int scoreValue = 100;
+
 	
 
 	// Update is called once per frame
@@ -44,6 +46,8 @@ public class ActorEnemy : MonoBehaviour
 		// Add Points to player and set as inactive
 		SendMessageUpwards("EnemyDeactive", SendMessageOptions.DontRequireReceiver);
 		transform.parent.gameObject.SetActive(false);
+
+		ActorLevelManager.instance.AddPoints(scoreValue);
 	}
 
 }
