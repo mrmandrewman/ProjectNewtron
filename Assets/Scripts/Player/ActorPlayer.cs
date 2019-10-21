@@ -104,7 +104,7 @@ public class ActorPlayer : MonoBehaviour
 			transform.Translate(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * moveSpeedPrototype * Time.deltaTime);
 		}
 
-		// Touch Controls
+		/* Touch Controls
 		//if (Input.touchCount > 0)
 		//{
 		//    touch = Input.GetTouch(0);
@@ -117,6 +117,7 @@ public class ActorPlayer : MonoBehaviour
 		//            break;
 		//    }
 		//}
+		*/
 
 	}
 
