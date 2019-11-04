@@ -11,7 +11,7 @@ public class ActorLevelManager : MonoBehaviour
 	int currentScore = 0;
 
 	// UI Elements
-	[SerializeField] UnityEngine.UI.Text scoreDisplay;
+	public UnityEngine.UI.Text scoreDisplay;
 
 	void Awake()
 	{

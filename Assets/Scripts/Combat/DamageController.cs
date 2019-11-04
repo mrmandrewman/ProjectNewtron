@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DamageController : MonoBehaviour {
 
-	[SerializeField] float maxHealth;
+	public float maxHealth;
 	private float currentHealth;
 
 	private void Awake()
@@ -19,5 +20,6 @@ public class DamageController : MonoBehaviour {
 		{
 			gameObject.SendMessage("Death");
 		}
+		
 	}
 }

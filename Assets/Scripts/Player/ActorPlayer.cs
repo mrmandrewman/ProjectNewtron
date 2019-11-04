@@ -26,8 +26,8 @@ public class ActorPlayer : MonoBehaviour
 
 	//private AttackType CurrentAttackType = AttackType.Basic;
 
-	[SerializeField] GameObject bullet;
-	[SerializeField] GameObject basicTurret;
+	public GameObject bullet;
+	public GameObject basicTurret;
 
 	public float moveSpeedPrototype = 3.0f;
 
@@ -46,7 +46,7 @@ public class ActorPlayer : MonoBehaviour
 	Vector3 InputDir;
 
 	// The boundary of the map that the player can move to
-	[SerializeField] ActorBounds boundary;
+	public ActorBounds boundary;
 
 	// Move Speed for Tilt Controls
 	[SerializeField] float moveSpeedTilt = 5.0f;
@@ -72,17 +72,16 @@ public class ActorPlayer : MonoBehaviour
 	void Start()
 	{
 		CalibrateAccelerometer();
-
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		// Accelerometer Input
 		InputDir = GetAccelerometer(Input.acceleration);
 		InputDir.z = 0;
 
-		// Check for floating point error
+		// Check for floating point error and apply input
 		if (Mathf.Abs((InputDir * moveSpeedTilt * Time.deltaTime).magnitude) > 0.02)
 		{
 			transform.Translate(InputDir * moveSpeedTilt * Time.deltaTime);
@@ -175,19 +174,8 @@ public class ActorPlayer : MonoBehaviour
 
 	#endregion
 
-
-
-	public void Shoot()
+	public void Death()
 	{
-		TrySpawnBullet(basicTurret);
+		gameObject.SetActive(false);
 	}
-
-	// Spawns a bullet at the referenced gameobject's transform, tries to dip into object pool
-	private bool TrySpawnBullet(GameObject origin)
-	{
-		GameObject bulletClone = Instantiate(bullet, origin.transform.position, origin.transform.rotation);
-		bulletClone.GetComponent<ActorProjectile>().ignoreTag = "Player";
-		return false;
-	}
-
 }

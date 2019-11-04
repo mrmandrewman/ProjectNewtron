@@ -2,36 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingController : MonoBehaviour {
+public class ShootingController : MonoBehaviour
+{
 
 	// publicly accessable boolean to turn shooting off and on
-	public bool bShotActive = true;
+	public bool bShotActive = false;
 
 	// How quickly the actor can shoot
 	public float shotReloadTime = 0.1f;
 
-	private void Awake()
-	{
-		// Start autoshooting
-		StartCoroutine("Shooting");
-	}
+	[SerializeField]
+	private GameObject projectile;
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	[SerializeField]
+	private Transform turret;
+
+	private void OnEnable()
+	{
+		StartCoroutine("Shooting");
 	}
 
 	virtual public IEnumerator Shooting()
 	{
 		while (bShotActive)
 		{
-			gameObject.SendMessage("Shoot", SendMessageOptions.RequireReceiver);
-
+			GameObject projectileClone = Instantiate(projectile, turret.position, turret.rotation);
+			projectileClone.GetComponent<ActorProjectile>().ignoreTag = gameObject.tag;
 			yield return new WaitForSeconds(shotReloadTime);
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "EnemyShootingZone")
+		{
+			if (bShotActive)
+			{
+				bShotActive = false;
+				StopAllCoroutines();
+				Debug.Log("Stop Shooting");
+			}
+			else
+			{
+				bShotActive = true;
+				StartCoroutine("Shooting");
+				Debug.Log("Start Shooting");
+			}
 		}
 	}
 }
