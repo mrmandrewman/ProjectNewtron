@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ActorLevelManager : MonoBehaviour
 {
@@ -11,19 +12,21 @@ public class ActorLevelManager : MonoBehaviour
 	int currentScore = 0;
 
 	// UI Elements
-	public UnityEngine.UI.Text scoreDisplay;
+	public Text scoreDisplay;
 
 	void Awake()
 	{
 		//Check if instance already exists
 		if (instance == null)
-
+		{
 			//if not, set instance to this
 			instance = this;
-
+		}
 		//If instance already exists and it's not this:
 		else if (instance != this)
 		{
+			// Set the scoredisplay of the instance that already exists to the score display associated with this Level Manager
+			instance.scoreDisplay = scoreDisplay;
 			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
 			Destroy(gameObject);
 		}
