@@ -50,5 +50,12 @@ public class ActorProjectile : MonoBehaviour
             collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);
         }
+
+		if (collision.gameObject.name == "DeactivateProjectiles")
+		{
+			Destroy(gameObject);
+		}
     }
+
+
 }

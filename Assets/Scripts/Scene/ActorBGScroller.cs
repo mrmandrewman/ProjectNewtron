@@ -16,7 +16,7 @@ public class ActorBGScroller : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
 		//Debug.Log(newPosition);

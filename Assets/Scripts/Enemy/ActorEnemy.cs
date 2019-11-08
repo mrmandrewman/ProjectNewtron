@@ -8,15 +8,20 @@ using UnityEngine;
 [RequireComponent(typeof(DamageController))]
 public class ActorEnemy : MonoBehaviour
 {
-	public ActorEnemyPath shipPath;
+	[SerializeField]
+	private ActorEnemyPath shipPath;
 	private float progress = 0;
 	private bool isFinished = false;
-	[SerializeField] GameObject turret;
-	[SerializeField] GameObject bullet;
 
-	[SerializeField] int scoreValue = 100;
+	[SerializeField]
+	private int scoreValue = 100;
 
-	
+	private ShootingController myShootingControler;
+
+	private void Start()
+	{
+		myShootingControler = GetComponent<ShootingController> ();
+	}
 
 	// Update is called once per frame
 	void Update()
@@ -26,28 +31,29 @@ public class ActorEnemy : MonoBehaviour
 			progress += Time.deltaTime;
 			transform.localPosition = shipPath.transform.InverseTransformPoint(shipPath.GetPathPoint(progress, out isFinished));
 		}
-
-		if (isFinished)
+		else
 		{
-			Death();
+			RemoveFromWave();
 		}
 
-	}
-
-	private bool Shoot()
-	{
-		//GameObject bulletClone = Instantiate(bullet, turret.transform.position, turret.transform.rotation);
-		//bulletClone.GetComponent<Projectile>().ignoreTag = "Enemy";
-		return false;
+		if (!myShootingControler.enabled && progress > shipPath.GetDelayTime(0))
+		{
+			myShootingControler.enabled = true;
+		}
 	}
 
 	private void Death()
 	{
 		// Add Points to player and set as inactive
-		SendMessageUpwards("EnemyDeactive", SendMessageOptions.DontRequireReceiver);
-		transform.parent.gameObject.SetActive(false);
-
 		ActorLevelManager.instance.AddPoints(scoreValue);
+		RemoveFromWave();
 	}
 
+	private void RemoveFromWave()
+	{
+
+		SendMessageUpwards("EnemyDeactive", SendMessageOptions.DontRequireReceiver);
+		transform.parent.gameObject.SetActive(false);
+	}
+	
 }
