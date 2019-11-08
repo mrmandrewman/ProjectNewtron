@@ -6,10 +6,16 @@ public class ShootingController : MonoBehaviour
 {
 
 	// publicly accessable boolean to turn shooting off and on
-	public bool bShotActive = false;
+	[SerializeField]
+	private bool bShotActive = false;
 
-	// How quickly the actor can shoot
-	public float shotReloadTime = 0.1f;
+	// How quickly the actor can without powerups
+	[SerializeField]
+	private float shotReloadTime = 0.1f;
+	[SerializeField, Tooltip("How much powerups multiply the reload speed")]
+	private float powerUpPower = 0.95f;
+
+	private float currentReloadTime;
 
 	[SerializeField]
 	private GameObject projectile;
@@ -17,34 +23,48 @@ public class ShootingController : MonoBehaviour
 	[SerializeField]
 	private Transform turret;
 
-	private void OnEnable()
+	private bool isShooting = false;
+
+	private void Start()
 	{
-		StartCoroutine("Shooting");
+		currentReloadTime = shotReloadTime * Mathf.Pow(powerUpPower, ActorLevelManager.instance.GetPowerLevel());
 	}
 
-	virtual public IEnumerator Shooting()
+	private void OnEnable()
 	{
+
+	}
+
+	public IEnumerator Shooting()
+	{
+		isShooting = true;
 		while (bShotActive)
 		{
 			GameObject projectileClone = Instantiate(projectile, turret.position, turret.rotation);
 			projectileClone.GetComponent<ActorProjectile>().ignoreTag = gameObject.tag;
-			yield return new WaitForSeconds(shotReloadTime);
+			yield return new WaitForSeconds(currentReloadTime);
 		}
+		isShooting = false;
+	}
+
+	public void PowerUp()
+	{
+		ActorLevelManager.instance.AddPowerUp(1);
+		currentReloadTime = shotReloadTime * Mathf.Pow(powerUpPower, ActorLevelManager.instance.GetPowerLevel());
+
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "EnemyShootingZone")
 		{
-			if (bShotActive)
+			if (isShooting)
 			{
-				bShotActive = false;
 				StopAllCoroutines();
 				Debug.Log("Stop Shooting");
 			}
 			else
 			{
-				bShotActive = true;
 				StartCoroutine("Shooting");
 				Debug.Log("Start Shooting");
 			}
