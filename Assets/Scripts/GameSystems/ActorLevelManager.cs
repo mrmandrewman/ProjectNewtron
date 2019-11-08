@@ -7,12 +7,11 @@ public class ActorLevelManager : MonoBehaviour
 {
 	public static ActorLevelManager instance = null;
 
+	// 
+	public UnityEngine.Events.UnityEvent scoreDisplay;
 
 	// Game Variables
 	int currentScore = 0;
-
-	// UI Elements
-	public Text scoreDisplay;
 
 	void Awake()
 	{
@@ -51,8 +50,7 @@ public class ActorLevelManager : MonoBehaviour
 		{
 			currentScore = 0;
 		}
-		scoreDisplay.text = GetScore(8);
-
+		scoreDisplay.Invoke();
 	}
 
 	public int GetScore()
