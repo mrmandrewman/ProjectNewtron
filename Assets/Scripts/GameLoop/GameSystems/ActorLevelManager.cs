@@ -11,7 +11,10 @@ public class ActorLevelManager : MonoBehaviour
 	public UnityEngine.Events.UnityEvent scoreDisplay;
 
 	// Game Variables
-	int currentScore = 0;
+	static int currentScore = 0;
+
+	// How many power ups the player has picked up
+	static int powerUpLevel = 0;
 
 	void Awake()
 	{
@@ -34,10 +37,6 @@ public class ActorLevelManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	private void Start()
-	{
-
-	}
 
 	// Method to alter points called by other scripts
 	public void AddPoints(int _points)
@@ -58,7 +57,6 @@ public class ActorLevelManager : MonoBehaviour
 		return currentScore;
 	}
 
-
 	// Returns the current score with specified number of digits, if digits entered is less than num of digits of score, returns score without any proceeding digits.
 	public string GetScore(int _digits)
 	{
@@ -69,5 +67,15 @@ public class ActorLevelManager : MonoBehaviour
 		}
 
 		return scoreString.PadLeft(_digits, '0');
+	}
+
+	public void AddPowerUp(int _powerUp)
+	{
+		powerUpLevel++;
+	}
+
+	public int GetPowerLevel()
+	{
+		return powerUpLevel;
 	}
 }

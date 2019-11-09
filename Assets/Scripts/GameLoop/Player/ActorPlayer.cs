@@ -55,7 +55,7 @@ public class ActorPlayer : MonoBehaviour
 	[SerializeField] float precisionControlPower = 1.6f;
 
 	// Used to Calibrate Device Tilt
-	public static Matrix4x4 calibrationMatrix;
+	private static Matrix4x4 calibrationMatrix;
 
 	// Deadzone Magnitudes
 	[SerializeField] float wantedDeadZone = 0.05f;
@@ -72,6 +72,7 @@ public class ActorPlayer : MonoBehaviour
 	void Start()
 	{
 		CalibrateAccelerometer();
+		gameObject.GetComponent<ShootingController>().StartCoroutine("Shooting");
 	}
 
 	// Update is called once per frame
