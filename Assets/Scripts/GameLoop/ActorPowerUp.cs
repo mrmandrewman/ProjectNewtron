@@ -8,10 +8,12 @@ using UnityEngine;
 
 public class ActorPowerUp : MonoBehaviour
 {
+	[SerializeField]
+	private Vector2 moveRate = new Vector2();
     // Start is called before the first frame update
     void Start()
     {
-        
+		GetComponent<Rigidbody2D>().velocity = moveRate;
     }
 
     // Update is called once per frame
