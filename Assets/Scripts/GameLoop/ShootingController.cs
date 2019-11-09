@@ -18,10 +18,10 @@ public class ShootingController : MonoBehaviour
 	private float currentReloadTime;
 
 	[SerializeField]
-	private GameObject projectile;
+	private GameObject projectile = null;
 
 	[SerializeField]
-	private Transform turret;
+	private Transform turret = null;
 
 	private bool isShooting = false;
 
