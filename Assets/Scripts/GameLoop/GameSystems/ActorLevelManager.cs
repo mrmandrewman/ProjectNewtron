@@ -9,27 +9,35 @@ public class ActorLevelManager : MonoBehaviour
 
 	// 
 	public UnityEngine.Events.UnityEvent scoreDisplay;
+	public ShootingController playerShootingController = null;
 
 	// Game Variables
 	static int currentScore = 0;
 
 	// How many power ups the player has picked up
-	static int powerUpLevel = 0;
+	static float playerReloadSpeed = 0;
 
-	void Awake()
+	void Start()
 	{
 		//Check if instance already exists
 		if (instance == null)
 		{
 			//if not, set instance to this
 			instance = this;
+
+			playerReloadSpeed = playerShootingController.shotReloadTime;
 		}
-		//If instance already exists and it's not this:
+		//If instance already exists and it's not this
 		else if (instance != this)
 		{
-			// Set the scoredisplay of the instance that already exists to the score display associated with this Level Manager
+			// Set the references of the instance that already exists to references associated with this Level Manager
 			instance.scoreDisplay = scoreDisplay;
-			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+			instance.playerShootingController = playerShootingController;
+
+			// Set the reload speed of the player to what's stored in the instance without affecting the firerate
+			instance.changeReloadSpeed(0);
+
+			//Destroy this, only allowing one instance
 			Destroy(gameObject);
 		}
 
@@ -69,13 +77,14 @@ public class ActorLevelManager : MonoBehaviour
 		return scoreString.PadLeft(_digits, '0');
 	}
 
-	public void AddPowerUp(int _powerUp)
+	public void changeReloadSpeed(float _reloadMultiplier)
 	{
-		powerUpLevel++;
+		playerReloadSpeed *= _reloadMultiplier;
+		playerShootingController.SetCurrentReloadSpeed(playerReloadSpeed);
 	}
 
-	public int GetPowerLevel()
+	public float GetFireRate()
 	{
-		return powerUpLevel;
+		return playerReloadSpeed;
 	}
 }
