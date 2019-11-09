@@ -72,6 +72,7 @@ public class ActorPlayer : MonoBehaviour
 	void Start()
 	{
 		CalibrateAccelerometer();
+		gameObject.GetComponent<ShootingController>().StartCoroutine("Shooting");
 	}
 
 	// Update is called once per frame

@@ -41,7 +41,7 @@ public class ShootingController : MonoBehaviour
 		while (bShotActive)
 		{
 			GameObject projectileClone = Instantiate(projectile, turret.position, turret.rotation);
-			projectileClone.GetComponent<ActorProjectile>().ignoreTag = gameObject.tag;
+			projectileClone.GetComponent<ActorProjectile>().ignoreTags.Add(gameObject.tag);
 			yield return new WaitForSeconds(currentReloadTime);
 		}
 		isShooting = false;
@@ -61,12 +61,10 @@ public class ShootingController : MonoBehaviour
 			if (isShooting)
 			{
 				StopAllCoroutines();
-				Debug.Log("Stop Shooting");
 			}
 			else
 			{
 				StartCoroutine("Shooting");
-				Debug.Log("Start Shooting");
 			}
 		}
 	}

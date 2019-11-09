@@ -13,6 +13,11 @@ public class ActorEnemy : MonoBehaviour
 	private float progress = 0;
 	private bool isFinished = false;
 
+	[SerializeField, Range(0, 1)]
+	private float powerUpDropChance = 0.05f;
+	[SerializeField]
+	private GameObject powerUpDrop;
+
 	[SerializeField]
 	private int scoreValue = 100;
 
@@ -46,7 +51,23 @@ public class ActorEnemy : MonoBehaviour
 	{
 		// Add Points to player and set as inactive
 		ActorLevelManager.instance.AddPoints(scoreValue);
+
+		// Chance to drop power up
+		TrySpawnPowerUp();
+
+		// Spawn death particle effect
+
+		// Change sprite colour to start explosion
 		RemoveFromWave();
+	}
+
+	private void TrySpawnPowerUp()
+	{
+		float diceRoll = Random.Range(0.0f, 1.0f);
+		if (diceRoll <= powerUpDropChance)
+		{
+			Instantiate(powerUpDrop,transform.position,transform.rotation);
+		}
 	}
 
 	private void RemoveFromWave()

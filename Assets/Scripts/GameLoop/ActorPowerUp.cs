@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 
-public class PowerUp : MonoBehaviour
+public class ActorPowerUp : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,9 @@ public class PowerUp : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Player")
 		{
-
+			Debug.Log(collision.gameObject);
+			collision.gameObject.GetComponent<ShootingController>().PowerUp();
+			Destroy(gameObject);
 		}
 	}
 
