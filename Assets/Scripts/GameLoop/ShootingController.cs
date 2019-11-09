@@ -9,13 +9,11 @@ public class ShootingController : MonoBehaviour
 	[SerializeField]
 	private bool bShotActive = false;
 
-	// How quickly the actor can without powerups
-	[SerializeField]
-	private float shotReloadTime = 0.1f;
-	[SerializeField, Tooltip("How much powerups multiply the reload speed")]
-	private float powerUpPower = 0.95f;
+	// How quickly the actor can shoot without powerups
+	public float shotReloadTime = 0.1f;
 
-	private float currentReloadTime;
+	// How quickly the actor can shoot with powerups
+	private float currentReloadTime = 0.1f;
 
 	[SerializeField]
 	private GameObject projectile = null;
@@ -25,14 +23,10 @@ public class ShootingController : MonoBehaviour
 
 	private bool isShooting = false;
 
-	private void Start()
+	// Called using awake so sets the currentReload Time before the actorLevelManager makes any changes necesarry 
+	private void Awake()
 	{
-		currentReloadTime = shotReloadTime * Mathf.Pow(powerUpPower, ActorLevelManager.instance.GetPowerLevel());
-	}
-
-	private void OnEnable()
-	{
-
+		currentReloadTime = shotReloadTime;
 	}
 
 	public IEnumerator Shooting()
@@ -47,11 +41,9 @@ public class ShootingController : MonoBehaviour
 		isShooting = false;
 	}
 
-	public void PowerUp()
+	public void SetCurrentReloadSpeed(float newReloadSpeed)
 	{
-		ActorLevelManager.instance.AddPowerUp(1);
-		currentReloadTime = shotReloadTime * Mathf.Pow(powerUpPower, ActorLevelManager.instance.GetPowerLevel());
-
+		currentReloadTime = newReloadSpeed;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
