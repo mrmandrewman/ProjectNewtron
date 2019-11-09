@@ -8,6 +8,7 @@ public class ActorLevelManager : MonoBehaviour
 	public static ActorLevelManager instance = null;
 
 	// 
+	public ActorGameMenu gameMenu = null;
 	public UnityEngine.Events.UnityEvent scoreDisplay;
 	public ShootingController playerShootingController = null;
 	public DamageController playerDamageController = null;
@@ -32,11 +33,13 @@ public class ActorLevelManager : MonoBehaviour
 			playerReloadSpeed = playerShootingController.shotReloadTime;
 			playerMaxHealth = playerDamageController.maxHealth;
 			playerCurrentHealth = playerDamageController.currentHealth;
+		
 		}
 		//If instance already exists and it's not this
 		else if (instance != this)
 		{
 			// Set the references of the instance that already exists to references associated with this Level Manager
+			instance.gameMenu = gameMenu;
 			instance.scoreDisplay = scoreDisplay;
 			instance.playerShootingController = playerShootingController;
 			instance.playerHealthDisplay = playerHealthDisplay;
@@ -109,5 +112,15 @@ public class ActorLevelManager : MonoBehaviour
 	public float GetPlayerMaxHealth()
 	{
 		return playerMaxHealth;
+	}
+
+	public void GameOver()
+	{
+		gameMenu.GameOver();
+	}
+
+	public void Victory()
+	{
+		gameMenu.Victory();
 	}
 }

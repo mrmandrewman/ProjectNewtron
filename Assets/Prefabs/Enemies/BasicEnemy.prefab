@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipPath: {fileID: 716049900401969955}
-  powerUpDropChance: 0.738
+  powerUpDropChance: 0.05
   powerUpDrop: {fileID: 1419590669197622, guid: 7b3ab889e91f1e249895a8c16fb904d4,
     type: 3}
   scoreValue: 100
@@ -260,7 +260,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bShotActive: 1
   shotReloadTime: 1
-  powerUpPower: 0.95
   projectile: {fileID: 1011689391348414, guid: 2cd713d1a1be2bc43b8e629a7420063f, type: 3}
   turret: {fileID: 716049899950292681}
 --- !u!114 &716049900943141650
@@ -276,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  currentHealth: 0
 --- !u!50 &716049900943141651
 Rigidbody2D:
   serializedVersion: 4

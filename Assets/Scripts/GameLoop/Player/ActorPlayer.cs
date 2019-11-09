@@ -177,6 +177,7 @@ public class ActorPlayer : MonoBehaviour
 
 	public void Death()
 	{
+		ActorLevelManager.instance.GameOver();
 		gameObject.SetActive(false);
 	}
 }

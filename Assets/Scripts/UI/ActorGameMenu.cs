@@ -6,45 +6,63 @@ using UnityEngine.SceneManagement;
 
 public class ActorGameMenu : MonoBehaviour
 {
+	public GameObject InGameUI;
+	public GameObject PauseMenu;
+	public GameObject GameOverMenu;
+	public GameObject VictoryMenu;
 
-    public GameObject PauseMenu;
-    public GameObject InGameUI;
+	public static bool bGameIsPaused = false;
 
-    public static bool bGameIsPaused = false;
 
-	private void Start()
+	private void OnEnable()
 	{
-		PauseGame();
+		GameOverMenu.SetActive(false);
+		PauseMenu.SetActive(false);
+		VictoryMenu.SetActive(false);
 	}
-	// Update is called once per frame
-	void Update()
-    {
 
-    }
-
-    public void PauseGame()
-    {
-        /* 
+	public void PauseGame()
+	{
+		/* 
         Hides the in game UI and Shows the Pausemenu and sets time scale to 0 
         (If time is needed for other functionality
         Time.unscaledDeltaTime should be used)
         */
-        PauseMenu.SetActive(true);
+		PauseMenu.SetActive(true);
 		PauseMenu.transform.GetComponentInChildren<Button>().Select();
-        Time.timeScale = 0.0f;
-        bGameIsPaused = true;
+		Time.timeScale = 0.0f;
+		bGameIsPaused = true;
 
-    }
+		InGameUI.transform.GetChild(2).GetComponent<Button>().interactable = false;
+	}
 
-    public void ResumeGame()
-    {
+	public void ResumeGame()
+	{
 		// Disables the pause menu and sets time back to normal
 		PauseMenu.SetActive(false);
 		Time.timeScale = 1.0f;
 		ActorPlayer.CalibrateAccelerometer();
 		ActorGameCamera.InitCameraSize();
-        bGameIsPaused = false;
-    }
+		bGameIsPaused = false;
+
+
+		InGameUI.transform.GetChild(2).GetComponent<Button>().interactable = true;
+	}
+
+	public void GameOver()
+	{
+		GameOverMenu.SetActive(true);
+		Time.timeScale = 0.0f;
+		GameOverMenu.transform.GetComponentInChildren<Button>().Select();
+
+		InGameUI.transform.GetChild(2).GetComponent<Button>().interactable = false;
+	}
+
+	public void Retry()
+	{
+		Destroy(ActorLevelManager.instance);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
 
 	public void MainMenuButton()
 	{
@@ -52,9 +70,18 @@ public class ActorGameMenu : MonoBehaviour
 		Time.timeScale = 1.0f;
 
 		// Destroy the LevelManager so previous progress doesn't get saved
-		Destroy(ActorLevelManager.instance.gameObject);
+		Destroy(ActorLevelManager.instance);
 
 		// Load the main menu
 		SceneManager.LoadScene(0);
+	}
+
+	public void Victory()
+	{
+		VictoryMenu.SetActive(true);
+		Time.timeScale = 0.0f;
+		VictoryMenu.transform.GetComponentInChildren<Button>().Select();
+
+		InGameUI.transform.GetChild(2).GetComponent<Button>().interactable = false;
 	}
 }
