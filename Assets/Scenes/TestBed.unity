@@ -1050,6 +1050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bShotActive: 1
   shotReloadTime: 0.2
+  powerUpPower: 0.95
   projectile: {fileID: 1011689391348414, guid: 0f09a000ca40d104785ba7c163bbbb36, type: 3}
   turret: {fileID: 1715890123}
 --- !u!114 &560349208
@@ -1397,7 +1398,7 @@ GameObject:
   - component: {fileID: 1037805439}
   m_Layer: 0
   m_Name: DeactivateProjectiles
-  m_TagString: Untagged
+  m_TagString: EnemyShootingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

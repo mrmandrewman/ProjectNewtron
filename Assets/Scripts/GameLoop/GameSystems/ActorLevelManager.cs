@@ -9,24 +9,35 @@ public class ActorLevelManager : MonoBehaviour
 
 	// 
 	public UnityEngine.Events.UnityEvent scoreDisplay;
+	public ShootingController playerShootingController = null;
 
 	// Game Variables
-	int currentScore = 0;
+	static int currentScore = 0;
 
-	void Awake()
+	// How many power ups the player has picked up
+	static float playerReloadSpeed = 0;
+
+	void Start()
 	{
 		//Check if instance already exists
 		if (instance == null)
 		{
 			//if not, set instance to this
 			instance = this;
+
+			playerReloadSpeed = playerShootingController.shotReloadTime;
 		}
-		//If instance already exists and it's not this:
+		//If instance already exists and it's not this
 		else if (instance != this)
 		{
-			// Set the scoredisplay of the instance that already exists to the score display associated with this Level Manager
+			// Set the references of the instance that already exists to references associated with this Level Manager
 			instance.scoreDisplay = scoreDisplay;
-			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+			instance.playerShootingController = playerShootingController;
+
+			// Set the reload speed of the player to what's stored in the instance without affecting the firerate
+			instance.changeReloadSpeed(0);
+
+			//Destroy this, only allowing one instance
 			Destroy(gameObject);
 		}
 
@@ -34,10 +45,6 @@ public class ActorLevelManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	private void Start()
-	{
-
-	}
 
 	// Method to alter points called by other scripts
 	public void AddPoints(int _points)
@@ -58,7 +65,6 @@ public class ActorLevelManager : MonoBehaviour
 		return currentScore;
 	}
 
-
 	// Returns the current score with specified number of digits, if digits entered is less than num of digits of score, returns score without any proceeding digits.
 	public string GetScore(int _digits)
 	{
@@ -69,5 +75,16 @@ public class ActorLevelManager : MonoBehaviour
 		}
 
 		return scoreString.PadLeft(_digits, '0');
+	}
+
+	public void changeReloadSpeed(float _reloadMultiplier)
+	{
+		playerReloadSpeed *= _reloadMultiplier;
+		playerShootingController.SetCurrentReloadSpeed(playerReloadSpeed);
+	}
+
+	public float GetFireRate()
+	{
+		return playerReloadSpeed;
 	}
 }
