@@ -9,14 +9,14 @@ using UnityEngine;
 public class ActorEnemy : MonoBehaviour
 {
 	[SerializeField]
-	private ActorEnemyPath shipPath;
+	private ActorEnemyPath shipPath = null;
 	private float progress = 0;
 	private bool isFinished = false;
 
 	[SerializeField, Range(0, 1)]
 	private float powerUpDropChance = 0.05f;
 	[SerializeField]
-	private GameObject powerUpDrop;
+	private GameObject powerUpDrop = null;
 
 	[SerializeField]
 	private int scoreValue = 100;
