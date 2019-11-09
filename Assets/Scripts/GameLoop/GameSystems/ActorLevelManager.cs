@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ActorLevelManager : MonoBehaviour
 {
 	public static ActorLevelManager instance = null;
 
+	// 
+	public UnityEngine.Events.UnityEvent scoreDisplay;
 
 	// Game Variables
 	static int currentScore = 0;
@@ -13,20 +16,19 @@ public class ActorLevelManager : MonoBehaviour
 	// How many power ups the player has picked up
 	static int powerUpLevel = 0;
 
-	// UI Elements
-	public UnityEngine.UI.Text scoreDisplay;
-
 	void Awake()
 	{
 		//Check if instance already exists
 		if (instance == null)
-
+		{
 			//if not, set instance to this
 			instance = this;
-
+		}
 		//If instance already exists and it's not this:
 		else if (instance != this)
 		{
+			// Set the scoredisplay of the instance that already exists to the score display associated with this Level Manager
+			instance.scoreDisplay = scoreDisplay;
 			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
 			Destroy(gameObject);
 		}
@@ -47,8 +49,7 @@ public class ActorLevelManager : MonoBehaviour
 		{
 			currentScore = 0;
 		}
-		scoreDisplay.text = GetScore(8);
-
+		scoreDisplay.Invoke();
 	}
 
 	public int GetScore()

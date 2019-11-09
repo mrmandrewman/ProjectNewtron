@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ActorGameMenu : MonoBehaviour
 {
 
     public GameObject PauseMenu;
     public GameObject InGameUI;
-	public Button PauseButton;
 
     public static bool bGameIsPaused = false;
 
@@ -30,19 +30,31 @@ public class ActorGameMenu : MonoBehaviour
         Time.unscaledDeltaTime should be used)
         */
         PauseMenu.SetActive(true);
-		PauseButton.interactable = false;
+		PauseMenu.transform.GetComponentInChildren<Button>().Select();
         Time.timeScale = 0.0f;
         bGameIsPaused = true;
+
     }
 
     public void ResumeGame()
     {
 		// Disables the pause menu and sets time back to normal
 		PauseMenu.SetActive(false);
-		PauseButton.interactable = true;
 		Time.timeScale = 1.0f;
 		ActorPlayer.CalibrateAccelerometer();
 		ActorGameCamera.InitCameraSize();
         bGameIsPaused = false;
     }
+
+	public void MainMenuButton()
+	{
+		// Return time to normal
+		Time.timeScale = 1.0f;
+
+		// Destroy the LevelManager so previous progress doesn't get saved
+		Destroy(ActorLevelManager.instance.gameObject);
+
+		// Load the main menu
+		SceneManager.LoadScene(0);
+	}
 }
