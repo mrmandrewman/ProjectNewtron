@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8741427683552745778}
   - component: {fileID: 8741427683552745779}
   - component: {fileID: 8741427683552745780}
-  - component: {fileID: 8741427683552745776}
   - component: {fileID: 8741427683552745781}
-  - component: {fileID: 8741427683552745791}
+  - component: {fileID: 8741427683552745776}
+  - component: {fileID: 6193613304343616734}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -137,23 +137,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5972222, y: 0.45833334}
   m_EdgeRadius: 0
---- !u!114 &8741427683552745776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8741427683552745782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed82a699f310bec48b7254298d9f8e3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bShotActive: 1
-  shotReloadTime: 0.2
-  powerUpPower: 0.8
-  projectile: {fileID: 1011689391348414, guid: 0f09a000ca40d104785ba7c163bbbb36, type: 3}
-  turret: {fileID: 8741427684641177324}
 --- !u!114 &8741427683552745781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +158,7 @@ MonoBehaviour:
   wantedDeadZone: 0.05
   wantedTiltLimit: 0.25
   wantedMaxClamp: 0.05
---- !u!114 &8741427683552745791
+--- !u!114 &8741427683552745776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,10 +167,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8741427683552745782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 909d9f0e157788945b5da4a6baacea4b, type: 3}
+  m_Script: {fileID: 11500000, guid: ed82a699f310bec48b7254298d9f8e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  bShotActive: 1
+  shotReloadTime: 0.2
+  projectile: {fileID: 1011689391348414, guid: 0f09a000ca40d104785ba7c163bbbb36, type: 3}
+  turret: {fileID: 8741427684641177324}
+--- !u!114 &6193613304343616734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8741427683552745782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fee2bf91958d54b9b3b3a8364e763e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 20
+  currentHealth: 0
 --- !u!1 &8741427684544876243
 GameObject:
   m_ObjectHideFlags: 0
