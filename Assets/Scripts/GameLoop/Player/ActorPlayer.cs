@@ -99,10 +99,10 @@ public class ActorPlayer : MonoBehaviour
 
 
 		// For Development only
-		if (Application.platform == RuntimePlatform.WindowsEditor)
-		{
+		//if (Application.platform == RuntimePlatform.WindowsEditor)
+		//{
 			transform.Translate(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * moveSpeedPrototype * Time.deltaTime);
-		}
+		//}
 
 		/* Touch Controls
 		//if (Input.touchCount > 0)
@@ -177,6 +177,7 @@ public class ActorPlayer : MonoBehaviour
 
 	public void Death()
 	{
+		ActorLevelManager.instance.GameOver();
 		gameObject.SetActive(false);
 	}
 }

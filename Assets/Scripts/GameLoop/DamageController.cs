@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class DamageController : MonoBehaviour {
 
 	public float maxHealth;
-	private float currentHealth;
+	[HideInInspector]
+	public float currentHealth;
 	
 	private void Awake()
 	{
@@ -21,13 +22,8 @@ public class DamageController : MonoBehaviour {
 		currentHealth -= _damage;
 		if (currentHealth <= 0)
 		{
-			gameObject.SendMessage("Death");
+			SendMessage("Death");
 		}
 		
-	}
-
-	protected virtual void Death()
-	{
-
 	}
 }

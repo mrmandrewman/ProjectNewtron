@@ -38,5 +38,9 @@ public class ActorWaveManager : MonoBehaviour
 		{
 			waves[currentWave].gameObject.SetActive(true);
 		}
+		else
+		{
+			ActorLevelManager.instance.Victory();
+		}
 	}
 }

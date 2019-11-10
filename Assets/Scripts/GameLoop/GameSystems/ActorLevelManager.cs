@@ -8,14 +8,19 @@ public class ActorLevelManager : MonoBehaviour
 	public static ActorLevelManager instance = null;
 
 	// 
+	public ActorGameMenu gameMenu = null;
 	public UnityEngine.Events.UnityEvent scoreDisplay;
 	public ShootingController playerShootingController = null;
-
+	public DamageController playerDamageController = null;
+	public HealthDisplay playerHealthDisplay = null;
 	// Game Variables
 	static int currentScore = 0;
 
 	// How many power ups the player has picked up
 	static float playerReloadSpeed = 0;
+
+	static float playerCurrentHealth;
+	static float playerMaxHealth;
 
 	void Start()
 	{
@@ -26,14 +31,18 @@ public class ActorLevelManager : MonoBehaviour
 			instance = this;
 
 			playerReloadSpeed = playerShootingController.shotReloadTime;
+			playerMaxHealth = playerDamageController.maxHealth;
+			playerCurrentHealth = playerDamageController.currentHealth;
+		
 		}
 		//If instance already exists and it's not this
 		else if (instance != this)
 		{
 			// Set the references of the instance that already exists to references associated with this Level Manager
+			instance.gameMenu = gameMenu;
 			instance.scoreDisplay = scoreDisplay;
 			instance.playerShootingController = playerShootingController;
-
+			instance.playerHealthDisplay = playerHealthDisplay;
 			// Set the reload speed of the player to what's stored in the instance without affecting the firerate
 			instance.changeReloadSpeed(0);
 
@@ -86,5 +95,32 @@ public class ActorLevelManager : MonoBehaviour
 	public float GetFireRate()
 	{
 		return playerReloadSpeed;
+	}
+
+	public void ChangePlayerCurrentHealth(float deltaHealth)
+	{
+		playerCurrentHealth += deltaHealth;
+		playerDamageController.currentHealth = playerCurrentHealth;
+		playerHealthDisplay.UpdateSlider();
+	}
+
+	public float GetPlayerCurrentHealth()
+	{
+		return playerCurrentHealth;
+	}
+
+	public float GetPlayerMaxHealth()
+	{
+		return playerMaxHealth;
+	}
+
+	public void GameOver()
+	{
+		gameMenu.GameOver();
+	}
+
+	public void Victory()
+	{
+		gameMenu.Victory();
 	}
 }
