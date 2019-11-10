@@ -60,6 +60,8 @@ public class ActorGameMenu : MonoBehaviour
 
 	public void Retry()
 	{
+		// Return time to normal
+		Time.timeScale = 1.0f;
 		Destroy(ActorLevelManager.instance);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
