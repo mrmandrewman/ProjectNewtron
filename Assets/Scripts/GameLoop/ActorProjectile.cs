@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ActorProjectile : MonoBehaviour
 {
-	public List<string> ignoreTags;
 	public float damage = 1.0f;
 	public float speed = 5;
 	public float TTL = 2.0f;
@@ -45,14 +44,6 @@ public class ActorProjectile : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		foreach (var ignoreTag in ignoreTags)
-		{
-			if (collision.gameObject.tag == ignoreTag)
-			{
-				return;
-			}
-
-		}
 
 		collision.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
 		Destroy(gameObject);

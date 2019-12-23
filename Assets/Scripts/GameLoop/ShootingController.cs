@@ -35,7 +35,6 @@ public class ShootingController : MonoBehaviour
 		while (bShotActive)
 		{
 			GameObject projectileClone = Instantiate(projectile, turret.position, turret.rotation);
-			projectileClone.GetComponent<ActorProjectile>().ignoreTags.Add(gameObject.tag);
 			yield return new WaitForSeconds(currentReloadTime);
 		}
 		isShooting = false;

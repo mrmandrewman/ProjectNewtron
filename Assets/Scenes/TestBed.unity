@@ -1106,7 +1106,7 @@ PrefabInstance:
     - target: {fileID: 7450727705325777543, guid: 0c2626c6d66899440aa716c5e1d24dcc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7450727705325777543, guid: 0c2626c6d66899440aa716c5e1d24dcc,
         type: 3}
@@ -1884,6 +1884,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738293651}
   m_CullTransparentMesh: 0
+--- !u!212 &752839070 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8741427683552745778, guid: 5d140a700bee4ea479c50d7b1f2d60e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 940638916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &767925055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,12 +1930,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2006983552}
+  - {fileID: 1351783752}
   - {fileID: 1934738374}
   - {fileID: 309551045}
   - {fileID: 5895981}
   - {fileID: 2624613165745874370}
-  - {fileID: 1351783752}
+  - {fileID: 2006983552}
   - {fileID: 1246563478941114972}
   - {fileID: 1303283540}
   m_Father: {fileID: 0}
@@ -2145,6 +2151,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 767925057}
     m_Modifications:
+    - target: {fileID: 1806097315774636704, guid: 4210a72897adea04fb24c67e391b8f0b,
+        type: 3}
+      propertyPath: m_Name
+      value: Wave_2Helix (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806097315774636704, guid: 4210a72897adea04fb24c67e391b8f0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2624613166726076993, guid: 4210a72897adea04fb24c67e391b8f0b,
         type: 3}
       propertyPath: m_Name
@@ -2203,16 +2219,6 @@ PrefabInstance:
     - target: {fileID: 2624613166726076995, guid: 4210a72897adea04fb24c67e391b8f0b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1806097315774636704, guid: 4210a72897adea04fb24c67e391b8f0b,
-        type: 3}
-      propertyPath: m_Name
-      value: Wave_2Helix (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1806097315774636704, guid: 4210a72897adea04fb24c67e391b8f0b,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1806097315774636706, guid: 4210a72897adea04fb24c67e391b8f0b,
@@ -2309,6 +2315,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193613304343616734, guid: 5d140a700bee4ea479c50d7b1f2d60e5,
+        type: 3}
+      propertyPath: spriteRendererColour.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193613304343616734, guid: 5d140a700bee4ea479c50d7b1f2d60e5,
+        type: 3}
+      propertyPath: spriteRendererColour.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193613304343616734, guid: 5d140a700bee4ea479c50d7b1f2d60e5,
+        type: 3}
+      propertyPath: spriteRendererColour.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193613304343616734, guid: 5d140a700bee4ea479c50d7b1f2d60e5,
+        type: 3}
+      propertyPath: playerSpriteRenderer
+      value: 
+      objectReference: {fileID: 752839070}
+    - target: {fileID: 6193613304343616734, guid: 5d140a700bee4ea479c50d7b1f2d60e5,
+        type: 3}
+      propertyPath: hitFlashTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193613304343616734, guid: 5d140a700bee4ea479c50d7b1f2d60e5,
+        type: 3}
+      propertyPath: hitInvinsibilityTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8741427683552745777, guid: 5d140a700bee4ea479c50d7b1f2d60e5,
         type: 3}
@@ -4041,6 +4077,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 767925057}
     m_Modifications:
+    - target: {fileID: 1806097315774636704, guid: 4210a72897adea04fb24c67e391b8f0b,
+        type: 3}
+      propertyPath: m_Name
+      value: Wave_2Helix
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806097315774636704, guid: 4210a72897adea04fb24c67e391b8f0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2624613166726076993, guid: 4210a72897adea04fb24c67e391b8f0b,
         type: 3}
       propertyPath: m_Name
@@ -4099,16 +4145,6 @@ PrefabInstance:
     - target: {fileID: 2624613166726076995, guid: 4210a72897adea04fb24c67e391b8f0b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1806097315774636704, guid: 4210a72897adea04fb24c67e391b8f0b,
-        type: 3}
-      propertyPath: m_Name
-      value: Wave_2Helix
-      objectReference: {fileID: 0}
-    - target: {fileID: 1806097315774636704, guid: 4210a72897adea04fb24c67e391b8f0b,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1806097315774636706, guid: 4210a72897adea04fb24c67e391b8f0b,
@@ -4174,7 +4210,7 @@ PrefabInstance:
     - target: {fileID: 7450727705325777543, guid: 0c2626c6d66899440aa716c5e1d24dcc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7450727705325777543, guid: 0c2626c6d66899440aa716c5e1d24dcc,
         type: 3}

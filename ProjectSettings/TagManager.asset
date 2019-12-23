@@ -16,12 +16,12 @@ TagManager:
   - 
   - 
   - Camera
-  - Projectiles
+  - Friendly
+  - Hostile
+  - FriendlyProjectiles
+  - HostileProjectiles
+  - PowerUps
   - Level Boundary
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 
